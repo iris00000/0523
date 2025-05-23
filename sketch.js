@@ -73,18 +73,21 @@ function draw() {
     }
     endShape(CLOSE);
 
-    // 畫左眼的紅色線條
-    stroke(255, 0, 0);
+    // 畫左眼的綠色線條並填滿紅色
+    fill(255, 0, 0, 200); // 半透明紅色
+    stroke(0, 255, 0); // 綠色線條
     strokeWeight(15);
-    for (let i = 0; i < leftEyeIndices.length - 1; i++) {
-      const idx1 = leftEyeIndices[i];
-      const idx2 = leftEyeIndices[i + 1];
-      const [x1, y1] = keypoints[idx1];
-      const [x2, y2] = keypoints[idx2];
-      line(x1, y1, x2, y2);
+    beginShape();
+    for (let i = 0; i < leftEyeIndices.length; i++) {
+      const idx = leftEyeIndices[i];
+      const [x, y] = keypoints[idx];
+      vertex(x, y);
     }
+    endShape(CLOSE);
 
     // 畫新陣列的紅色線條
+    stroke(255, 0, 0);
+    strokeWeight(15);
     for (let i = 0; i < newIndices.length - 1; i++) {
       const idx1 = newIndices[i];
       const idx2 = newIndices[i + 1];
